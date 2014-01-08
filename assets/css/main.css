@@ -1,0 +1,8 @@
+.bottomSpace input{
+	margin-bottom: 3px;
+}
+
+.wrap-container{
+	width: 1024px;
+	margin: auto;
+}
