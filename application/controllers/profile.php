@@ -17,7 +17,7 @@ class Profile extends MY_Controller {
 
     public function insertProfile()	
 	{
-		$this->dao->insertCustomer( $this->getValues() );
+		$this->dao->insertProfile( $this->getValues() );
 	}
 
 	private function getValues()
@@ -32,7 +32,8 @@ class Profile extends MY_Controller {
 		$data['activo'] 			= 1;
 		$data['fecha_creacion'] 	= date("Y-m-d");
 		$data['fecha_modificacion'] = date("Y-m-d");
-		$data['leyenda'] = $this->input->post('leyenda');
+		$data['leyenda'] 		    = $this->input->post('leyenda');
+		$data['concepto_recibos']   = $this->input->post('concepto');
 
 		/* -- Upload file -- */
 		$dataUpload = $this->do_upload();

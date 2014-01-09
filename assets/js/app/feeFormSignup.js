@@ -61,7 +61,7 @@ Class(UI,'feeFormSignup').inherits(Widget)({
 
 		},
 
-		_getValues : function(event){
+		_getValues : function(){
 			return this.formSignup.serialize();
 		},
 
@@ -69,7 +69,7 @@ Class(UI,'feeFormSignup').inherits(Widget)({
 			
 			$.ajax({
 				  type: "POST",
-				  url: "http://localhost/fee4free/index.php/alta/tryajax",
+				  url: "http://localhost/fee4free/index.php/customers/insertCustomer",
 				  data: this._getValues(),
 				  dataType: "json",
 				})
