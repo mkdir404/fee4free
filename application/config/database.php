@@ -48,10 +48,10 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = '127.0.0.1';
-$db['default']['username'] = 'root';
-$db['default']['password'] = '';
-$db['default']['database'] = 'fee4free';
+$db['default']['hostname'] = HOST;// "localhost";
+$db['default']['username'] = USER;//"root";
+$db['default']['password'] = PASSWORD;//"";
+$db['default']['database'] = BD;//"extsipv2";
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;

@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Alta extends CI_Controller {
+class Alta extends MY_Controller {
 
 	/**	 
 	 * Alta de usuarios o de empresas en su defecto

@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class AltaDAO extends CI_Model {
+class AltaDAO extends MY_Model {
 
 	/**	 
 	 * Alta de usuarios o de empresas en su defecto
@@ -14,5 +14,3 @@ class AltaDAO extends CI_Model {
 	}	
 }	
 
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */

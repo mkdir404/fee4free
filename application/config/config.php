@@ -1,5 +1,7 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+include("config.php");
+
 /*
 |--------------------------------------------------------------------------
 | Base Site URL
