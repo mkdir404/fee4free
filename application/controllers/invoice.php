@@ -11,6 +11,45 @@ class Invoice extends MY_Controller {
 	function __construct()
     {
         parent::__construct();
+        $this->load->model('invoicedao');
+        $this->dao = $this->invoicedao;
+    }
+
+    public function insertInvoice()
+    {
+    	$this->dao->insertInvoice( $this->getValues() );
+
+    	echo '{ success:true }';
+    }
+
+    private function getValues()
+    {
+
+ 		$data['nombre'] 			= $this->input->post('nombre');
+		$data['calle'] 				= $this->input->post('calle');
+		$data['colonia'] 			= $this->input->post('colonia');
+		$data['delegacion']			= $this->input->post('delegacion');
+		$data['codigo_postal'] 		= $this->input->post('codigo_postal');
+		$data['rfc'] 				= $this->input->post('rfc');	
+		$data['folio'] 				= $this->input->post('folio');
+		$data['fecha_factura'] 		= $this->input->post('fecha_factura');
+		$data['concepto'] 			= $this->input->post('concepto');
+		$data['cantidad'] 			= $this->input->post('cantidad');
+		$data['iva'] 				= $this->input->post('iva');
+		$data['sub_total'] 			= $this->input->post('sub_total');
+		$data['iva_retenido'] 		= $this->input->post('iva_retenido');
+		$data['isr'] 				= $this->input->post('isr');
+		$data['total_pagado'] 		= $this->input->post('total_pagado');
+
+		#si buscan un cliente se debera registra
+		#$data['llave_customer'] 	= $this->input->post('llave_customer');
+
+		$data['activo'] 			= 1;
+		$data['fecha_creacion'] 	= date("Y-m-d");
+		$data['fecha_modificacion'] = date("Y-m-d");
+
+		return $data;
+    	
     }
 
     public function generatePDF()

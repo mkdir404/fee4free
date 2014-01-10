@@ -18,6 +18,8 @@ class Profile extends MY_Controller {
     public function insertProfile()	
 	{
 		$this->dao->insertProfile( $this->getValues() );
+
+		echo '{ success:true }';
 	}
 
 	private function getValues()

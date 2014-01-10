@@ -18,6 +18,8 @@ class Customers extends MY_Controller {
     public function insertCustomer()	
 	{
 		$this->dao->insertCustomer( $this->getValues() );
+
+		echo '{ success:true }';
 	}
 
 	private function getValues()

@@ -10,7 +10,10 @@ Class(UI,'feeFormReceipt').inherits(Widget)({
 			  <div class="panel-body">\
 			    <form id="formRecibos">\
 				  <div class="form-group">\
-				    <input type="text" class="form-control" name="nombre"  placeholder="Nombre / Empresa ">\
+					   <div class="input-group">\
+					     <input type="text" class="form-control" name="nombre" placeholder="Nombre / Empresa "  >\
+					     <span class="input-group-addon"><i class="fa fa-search"></i></span>\
+					  </div>\
 				  </div>\
 				 <div class="form-group">\
 				    <input type="text" class="form-control" name="calle"  placeholder="Calle">\
@@ -31,7 +34,7 @@ Class(UI,'feeFormReceipt').inherits(Widget)({
 				    <input type="text" class="form-control" name="folio" placeholder="Folio">\
 				 </div>\
 				 <div class="form-group col-xs-6 ">\
-				    <input type="text" class="form-control" name="fecha"placeholder="Fecha">\
+				    <input type="text" class="form-control" name="fecha_factura"placeholder="Fecha">\
 				 </div>\
 				 <div class="form-group">\
 				 	<textarea class="form-control" rows="5" name="concepto" placeholder ="Concepto"></textarea>\
@@ -42,7 +45,7 @@ Class(UI,'feeFormReceipt').inherits(Widget)({
 				    <input type="text" class="form-control" name="sub_total" placeholder="Sub-Total"  >\
 				 </div>\
 				 <div class="form-group col-xs-3 bottomSpace">\
-				    <input type="text" class="form-control" name="iva_ret" placeholder="I.V.A Retenido"  >\
+				    <input type="text" class="form-control" name="iva_retenido" placeholder="I.V.A Retenido"  >\
 				    <input type="text" class="form-control" name="isr" placeholder="I.S.R"   >\
 				    <input type="text" class="form-control" name="total_pagado" placeholder="Total Pagado">\
 				 </div>\
@@ -58,10 +61,24 @@ Class(UI,'feeFormReceipt').inherits(Widget)({
 		init : function(){
 			Widget.prototype.init.call(this);
 
-			this.formReceipt = this.element.find('#formRecibos');
+			this.formReceipt  = this.element.find('#formRecibos');
 			this.itemSubmitEl = this.element.find('#guardar');
 
+			/*input para calcular pago*/
+
+			this.cantidad  = this.element.find('input[name=cantidad]');
+			this.iva 	   = this.element.find('input[name=iva]');
+			this.sub_total = this.element.find('input[name=sub_total]');
+
+			this.iva_retenido = this.element.find('input[name=iva_retenido]');
+			this.isr 	 	  = this.element.find('input[name=isr]');
+			this.total_pagado = this.element.find('input[name=total_pagado]');
+
+			/*efecto del elemento*/
+		
 			this.element.fadeIn( "slow" );
+
+			/*bind del elemento*/
 			
 			this._bindEvents();
 
@@ -69,10 +86,11 @@ Class(UI,'feeFormReceipt').inherits(Widget)({
 		},
 
 		_bindEvents :function() {
-			this.itemSubmitEl.click( this._sendInfo.bind(this) ); 
+			this.itemSubmitEl.click( this._sendInfo.bind(this) );
+			this.cantidad.keypress( this._payment.bind(this) );
 		},
 
-		_getValues : function(event){
+		_getValues : function(){
 			return this.formReceipt.serialize();
 		},
 
@@ -80,7 +98,7 @@ Class(UI,'feeFormReceipt').inherits(Widget)({
 			
 			$.ajax({
 				  type: "POST",
-				  url: "http://localhost/fee4free/index.php/alta/getValues",
+				  url: "http://localhost/fee4free/index.php/invoice/insertInvoice",
 				  data: this._getValues(),
 				  dataType: "json",
 				})
@@ -89,6 +107,35 @@ Class(UI,'feeFormReceipt').inherits(Widget)({
 				  });
 			
 			event.preventDefault();
+		},
+
+		_payment : function(event){
+
+			//console.log(event);
+
+			if(event.charCode == 13){
+			
+			cantidadNeta = parseInt( this.cantidad.val() );
+			iva = cantidadNeta * 16/100;
+			ivaRetenido = (iva/3)*2;
+			isr = 0.1 * cantidadNeta;
+			console.log(iva);
+			subtotal = (cantidadNeta + iva );
+
+			totalPagar = subtotal-ivaRetenido-isr;
+			
+			/*Set value input*/
+			
+			this.iva.val( iva.toFixed(2) );
+			this.sub_total.val( subtotal.toFixed(2)  );
+
+			this.iva_retenido.val( ivaRetenido.toFixed(2) );
+			this.isr.val( isr.toFixed(2) );
+			this.total_pagado.val( Math.round( totalPagar.toFixed(2) ) );
+
+			}
+
+
 		}
 	}
 });
