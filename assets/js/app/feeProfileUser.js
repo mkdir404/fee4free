@@ -71,7 +71,7 @@ Class(UI,'feeProfileUser').inherits(Widget)({
 
 			this._bindEvents();
 
-			this.loadData();
+			this.loadData();			
 			
 			return this;
 			

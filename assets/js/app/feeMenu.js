@@ -62,7 +62,7 @@ Class(UI,'feeMenu').inherits(Widget)({
 			valueEl = event.currentTarget.innerText;
 			valueEl.trim();
 
-			console.log(valueEl);
+			//console.log(valueEl);
 
 			switch(valueEl){
 				case 'Altas' : //feeFormAltas

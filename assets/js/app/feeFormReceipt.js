@@ -12,7 +12,7 @@ Class(UI,'feeFormReceipt').inherits(Widget)({
 				  <div class="form-group">\
 					   <div class="input-group">\
 					     <input type="text" class="form-control" name="nombre" placeholder="Nombre / Empresa "  >\
-					     <span class="input-group-addon"><i class="fa fa-search"></i></span>\
+					     <span class="input-group-addon" data-toggle="modal" data-target="#myModal" id="search-nombre"><i class="fa fa-search"></i></span>\
 					  </div>\
 				  </div>\
 				 <div class="form-group">\
@@ -63,6 +63,7 @@ Class(UI,'feeFormReceipt').inherits(Widget)({
 
 			this.formReceipt  = this.element.find('#formRecibos');
 			this.itemSubmitEl = this.element.find('#guardar');
+			this.searchEl 	  = this.element.find('#search-nombre');
 
 			/*input para calcular pago*/
 
@@ -78,9 +79,12 @@ Class(UI,'feeFormReceipt').inherits(Widget)({
 		
 			this.element.fadeIn( "slow" );
 
+			this.windowsModal = new UI.windowsModal({htmlRender : '<p>this element pass from other widget</p>'});
+			this.windowsModal.render(this.element);
+
 			/*bind del elemento*/
 			
-			this._bindEvents();
+			this._bindEvents();			
 
 			return this;
 		},
@@ -88,6 +92,7 @@ Class(UI,'feeFormReceipt').inherits(Widget)({
 		_bindEvents :function() {
 			this.itemSubmitEl.click( this._sendInfo.bind(this) );
 			this.cantidad.keypress( this._payment.bind(this) );
+			this.searchEl.click( this._searchNombre.bind(this) );
 		},
 
 		_getValues : function(){
@@ -136,6 +141,12 @@ Class(UI,'feeFormReceipt').inherits(Widget)({
 			}
 
 
+		},
+
+		_searchNombre : function(){
+			//this.windowsModal = new UI.windowsModal();
+			//this.windowsModal.render(this.element);
+			//$('#myModal').modal(options)
 		}
 	}
 });
