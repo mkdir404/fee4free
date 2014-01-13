@@ -8,8 +8,9 @@ Class(UI,'feeProfileUser').inherits(Widget)({
 			<h4 style="color:#41a096;">Perfil Usuario</h4>\
 		</div>\
 		  <div class="panel-body">\
-		    <form enctype="multipart/form-data">\
+		    <form >\
 			  <div class="form-group">\
+			  	<input type="hidden" id="id_perfil">\
 			    <input type="text" class="form-control" name="nombre" placeholder="Nombre / Empresa">\
 			  </div>\
 			 <div class="form-group">\
@@ -50,16 +51,27 @@ Class(UI,'feeProfileUser').inherits(Widget)({
 	prototype:{
 		init : function(){
 			Widget.prototype.init.call(this);	
-
-			this.inputItemsEl = this.element.find('input');
-			this.txtAleyenda  = this.element.find('#leyeda');
-			this.txtAconcepto = this.element.find('#concepto');
-			this.itemFile 	  = this.element.find('#myfile');
-			this.itemSubmitEl = this.element.find('#guardar');
+			
+			this.inputIdPerfil   = this.element.find('#id_perfil');
+			this.inputNombre     = this.element.find('input[name=nombre]');
+			this.inputCalle      = this.element.find('input[name=calle]');
+			this.inputColonia  	 = this.element.find('input[name=colonia]');
+			this.inputDelegacion = this.element.find('input[name=delegacion]');
+			this.inputCodigoP    = this.element.find('input[name=codigo_postal]');
+			this.inputRfc        = this.element.find('input[name=rfc]');
+			this.inputTelefono   = this.element.find('input[name=telefono]');
+			this.leyenda         = this.element.find('input[name=leyenda]');
+			this.concepto        = this.element.find('input[name=concepto]');
+			this.txtAleyenda     = this.element.find('#leyeda');
+			this.txtAconcepto	 = this.element.find('#concepto');
+			this.itemFile 	  	 = this.element.find('#myfile');
+			this.itemSubmitEl 	 = this.element.find('#guardar');
 
 			this.element.fadeIn( "slow" );
 
 			this._bindEvents();
+
+			this.loadData();
 			
 			return this;
 			
@@ -69,34 +81,77 @@ Class(UI,'feeProfileUser').inherits(Widget)({
 		},
 
 		_getValues : function(){
-
-			//console.log(this.textArea);
 			
 			objectValues = {
 				
-				'nombre'       : this.inputItemsEl[0].value,
-				'calle'        : this.inputItemsEl[1].value,
-				'colonia'      : this.inputItemsEl[2].value,
-				'delegacion'   : this.inputItemsEl[3].value,
-				'codigoPostal' : this.inputItemsEl[4].value,
-				'rfc'		   : this.inputItemsEl[5].value,
-				'telefono'     : this.inputItemsEl[6].value,
-				'leyenda'	   : this.txtAleyenda.val(),
-				'concepto'	   : this.txtAconcepto.val()
+				'nombre'        : this.inputNombre.val() ,
+				'calle'         : this.inputCalle.val() ,
+				'colonia'       : this.inputColonia.val() ,
+				'delegacion'    : this.inputDelegacion.val(),
+				'codigo_postal' : this.inputCodigoP.val(),
+				'rfc'		    : this.inputRfc.val(),
+				'telefono'      : this.inputTelefono.val(),
+				'leyenda'	    : this.txtAleyenda.val(),
+				'concepto'	    : this.txtAconcepto.val(),
+
 
 			}
+
+			if(this.inputIdPerfil.val()!=''){ objectValues.idPerfil = this.inputIdPerfil.val(); }
 			
 			return objectValues;
 		},
 
 		_sendInfo : function(event){
 
-			this.itemFile.upload('http://localhost/fee4free/index.php/profile/insertProfile',this._getValues(),
+			this.itemFile.upload('http://localhost/fee4free/index.php/profile/setPerfil',this._getValues(),
 				function(msg){
 					alert( "Data Saved: " + msg );
 				}
 			);
-			event.preventDefault()
+
+			//console.log ( this._getValues() );
+
+			event.preventDefault()	
+		},
+
+		loadData : function(){
+
+			$.ajax({
+				  context: this,
+				  type: "POST",
+				  url: "http://localhost/fee4free/index.php/profile/getData",			
+				  dataType: "json",
+				})
+				  .done(function( data ) {
+
+				  	console.log(data);
+
+				  	if(data.success){
+
+				  		/*set all values*/
+
+					    this.inputIdPerfil.val(data.id);
+					    this.inputNombre.val(data.nombre);
+						this.inputCalle.val(data.calle);
+						this.inputColonia.val(data.colonia); 
+						this.inputDelegacion.val(data.delegacion);
+						this.inputCodigoP.val(data.codigo_postal);
+						this.inputRfc.val(data.rfc); 
+						this.inputTelefono.val(data.telefono); 				
+						this.txtAleyenda.val(data.leyenda);
+						this.txtAconcepto.val(data.concepto_recibos);
+
+						/*change de button class*/
+						this.itemSubmitEl.removeClass();
+				 		this.itemSubmitEl.text('Actualizar').addClass('btn btn-warning');
+
+				 	}
+
+				 	
+				  
+
+				  });
 		}
 	}
 });

@@ -15,20 +15,23 @@ class Profile extends MY_Controller {
         $this->dao = $this->profiledao;
     }
 
-    public function insertProfile()	
+    public function insertProfile($data)	
 	{
-		$this->dao->insertProfile( $this->getValues() );
-
-		echo '{ success:true }';
+		$this->dao->insertProfile($data);		
 	}
 
-	private function getValues()
+	public function updateProfile($data , $id)
+	{	
+		$this->dao->updateProfile( $data , $id);
+	}
+
+	public function setPerfil()
 	{
 		$data['nombre'] 			= $this->input->post('nombre');
 		$data['calle'] 				= $this->input->post('calle');
 		$data['colonia'] 			= $this->input->post('colonia');
 		$data['delegacion']			= $this->input->post('delegacion');
-		$data['codigo_postal'] 		= $this->input->post('codigoPostal');
+		$data['codigo_postal'] 		= $this->input->post('codigo_postal');
 		$data['rfc'] 				= $this->input->post('rfc');
 		$data['telefono'] 			= $this->input->post('telefono');
 		$data['activo'] 			= 1;
@@ -38,11 +41,28 @@ class Profile extends MY_Controller {
 		$data['concepto_recibos']   = $this->input->post('concepto');
 
 		/* -- Upload file -- */
-		$dataUpload = $this->do_upload();
-		
-		$data['ruta_imagen'] = 'uploads/imgSat/'.$dataUpload['orig_name'];
 
-		return $data;
+		$dataUpload = $this->do_upload();	
+		
+		if($dataUpload['orig_name']!==''){
+
+			$data['ruta_imagen'] = 'uploads/imgSat/'.$dataUpload['orig_name'];
+		}
+
+		if($this->input->post('idPerfil') !== false){
+
+			$id = $this->input->post('idPerfil');
+			$data['fecha_modificacion'] = date("Y-m-d");
+			$this->updateProfile($data,$id);
+		
+		}else{
+
+			$this->insertProfile($data);
+		}
+		
+		
+	
+		echo '{ success:true }';
 	
 	}
 

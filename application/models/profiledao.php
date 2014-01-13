@@ -11,12 +11,23 @@ class ProfileDAO extends MY_Model {
 	function __construct()
     {
         parent::__construct();
+
+        /*Global Variable*/
+		
+		$this->defaultTable = 'fee_profile';         
+    
     }
 
     public function insertProfile($data)
 	{
-		$this->db->insert('fee_profile',$data);
+		$this->db->insert($this->defaultTable,$data);
 	}
 
+	public function updateProfile($data,$id)
+	{
+		$this->db->where('id', $id);
+		$this->db->update($this->defaultTable , $data);
+	}
+	
 }	
 

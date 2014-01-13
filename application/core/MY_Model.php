@@ -12,4 +12,10 @@ class MY_Model extends CI_Model {
     {
         parent::__construct();
     }
+
+    public function getData()
+	{
+		$query = $this->db->get($this->defaultTable);
+		return $query->result_array();
+	}
 }

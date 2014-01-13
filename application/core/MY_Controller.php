@@ -42,4 +42,18 @@ class MY_Controller extends CI_Controller {
             }		
 	}
 
+    public function getData()
+    {
+        $data = $this->dao->getData();
+        
+        if(count($data) > 0 ){
+            $data[0]['success'] = true;
+            echo json_encode($data[0]);
+        }else{
+            $data[0]['success'] = false;
+            echo json_encode($data[0]);
+        }
+        
+    }
+
 }
