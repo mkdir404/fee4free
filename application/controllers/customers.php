@@ -39,4 +39,9 @@ class Customers extends MY_Controller {
 	
 	}
 
+	public function getAllResult()
+	{
+		//query que va traer
+	}
+
 }

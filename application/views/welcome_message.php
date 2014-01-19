@@ -44,6 +44,7 @@
 	<script type="text/javascript" src ="<?php echo base_url();?>assets/js/app/feeProfileUser.js"></script>
 	<script type="text/javascript" src ="<?php echo base_url();?>assets/js/app/feeFormReceipt.js"></script>
 	<script type="text/javascript" src ="<?php echo base_url();?>assets/js/app/modalwindows.js"></script>
+	<script type="text/javascript" src ="<?php echo base_url();?>assets/js/app/grid.js"></script>
 	<script type="text/javascript" src ="<?php echo base_url();?>assets/js/app/index.js"></script>
 
 </head>

@@ -79,7 +79,7 @@ Class(UI,'feeFormReceipt').inherits(Widget)({
 		
 			this.element.fadeIn( "slow" );
 
-			this.windowsModal = new UI.windowsModal({htmlRender : '<p>this element pass from other widget</p>'});
+			this.windowsModal = new UI.windowsModal();
 			this.windowsModal.render(this.element);
 
 			/*bind del elemento*/

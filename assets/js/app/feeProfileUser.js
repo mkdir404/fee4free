@@ -125,33 +125,28 @@ Class(UI,'feeProfileUser').inherits(Widget)({
 				})
 				  .done(function( data ) {
 
-				  	console.log(data);
+					  	if(data.success){
 
-				  	if(data.success){
+					  		/*set all values*/
 
-				  		/*set all values*/
+						    this.inputIdPerfil.val(data.id);
+						    this.inputNombre.val(data.nombre);
+							this.inputCalle.val(data.calle);
+							this.inputColonia.val(data.colonia); 
+							this.inputDelegacion.val(data.delegacion);
+							this.inputCodigoP.val(data.codigo_postal);
+							this.inputRfc.val(data.rfc); 
+							this.inputTelefono.val(data.telefono); 				
+							this.txtAleyenda.val(data.leyenda);
+							this.txtAconcepto.val(data.concepto_recibos);
 
-					    this.inputIdPerfil.val(data.id);
-					    this.inputNombre.val(data.nombre);
-						this.inputCalle.val(data.calle);
-						this.inputColonia.val(data.colonia); 
-						this.inputDelegacion.val(data.delegacion);
-						this.inputCodigoP.val(data.codigo_postal);
-						this.inputRfc.val(data.rfc); 
-						this.inputTelefono.val(data.telefono); 				
-						this.txtAleyenda.val(data.leyenda);
-						this.txtAconcepto.val(data.concepto_recibos);
+							/*change de button class*/
+							this.itemSubmitEl.removeClass();
+					 		this.itemSubmitEl.text('Actualizar').addClass('btn btn-warning');
 
-						/*change de button class*/
-						this.itemSubmitEl.removeClass();
-				 		this.itemSubmitEl.text('Actualizar').addClass('btn btn-warning');
+					 	}				 				 
 
-				 	}
-
-				 	
-				  
-
-				  });
+		          });
 		}
 	}
 });
