@@ -11,11 +11,12 @@ class CustomersDAO extends MY_Model {
 	function __construct()
     {
         parent::__construct();
+        $this->defaultTable = 'fee_customer';
     }
 
     public function insertCustomer($data)
 	{
-		$this->db->insert('fee_customer',$data);
+		$this->db->insert($this->defaultTable ,$data);
 	}
 }	
 

@@ -147,6 +147,7 @@ Class(UI,'feeFormReceipt').inherits(Widget)({
 			//this.windowsModal = new UI.windowsModal();
 			//this.windowsModal.render(this.element);
 			//$('#myModal').modal(options)
+			this.windowsModal.launchWindows();
 		}
 	}
 });

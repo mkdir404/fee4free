@@ -44,14 +44,20 @@ class MY_Controller extends CI_Controller {
 
     public function getData()
     {
+        if( $this->input->post('params') && $this->input->post('params') !== ''  ){
+            $params = $this->input->post('params');
+            $this->db->where($params);                     
+        }
+
+
         $data = $this->dao->getData();
         
         if(count($data) > 0 ){
             $data[0]['success'] = true;
-            echo json_encode($data[0]);
+            echo json_encode($data);
         }else{
             $data[0]['success'] = false;
-            echo json_encode($data[0]);
+            echo json_encode($data);
         }
         
     }

@@ -17,5 +17,34 @@ class MY_Model extends CI_Model {
 	{
 		$query = $this->db->get($this->defaultTable);
 		return $query->result_array();
+
+		//print_r( $query->result_array() );
+	}
+
+	public function insertData($data)
+	{
+		
+		return $this->db->insert($this->defaultTable, $data); 
+
+	}
+
+	public function UpdateData($data , $where = null)
+	{
+		if($where!==null){
+
+			$this->db->where($where);
+		}
+
+		return $this->db->update($this->defaultTable, $data); 
+	}
+
+	public function DeleteData($data)
+	{
+		if($where!==null){
+
+			$this->db->where($where);
+		}
+
+		return $this->db->delete($this->defaultTable, $data); 
 	}
 }

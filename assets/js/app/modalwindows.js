@@ -13,7 +13,7 @@ Class(UI,'windowsModal').inherits(Widget)({
 			      </div>\
 			      <div class="modal-footer">\
 			        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>\
-			        <button type="button" class="btn btn-primary">Save changes</button>\
+			        <button type="button" class="btn btn-primary" id="insert_customer" >Save changes</button>\
 			      </div>\
 			    </div>\
 			  </div>\
@@ -36,9 +36,11 @@ Class(UI,'windowsModal').inherits(Widget)({
 		},
 
 		_bindEvents : function(){
-			this.buttonEl.click( this._launchWindows.bind(this) );
+			this.buttonEl.click( this.launchWindows.bind(this) );
 		},
-		_launchWindows :function(){
+		launchWindows :function(){
+			gridUsers.loadGrid();
+			gridUsers.render(this.modalBody);
 
 		}
 	}
