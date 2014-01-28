@@ -6,3 +6,7 @@
 	width: 1024px;
 	margin: auto;
 }
+
+table tr {
+	cursor: pointer;
+}

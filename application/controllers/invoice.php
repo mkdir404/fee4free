@@ -52,6 +52,17 @@ class Invoice extends MY_Controller {
     	
     }
 
+    /*return invoice generate*/
+
+    private function generateInvoice()
+    {
+    	
+    	$data = $this->getValues();
+
+
+    	return $this->load->view('pdfhtml',$data,true);
+    }
+
     public function generatePDF()
     {
     	
@@ -72,11 +83,30 @@ class Invoice extends MY_Controller {
 
 		$dompdf = new DOMPDF();
  		//$dompdf->load_html($html);
- 		$dompdf->load_html($html.$htmlView.$footer);
+ 		$dompdf->load_html($html.$this->generateInvoice().$footer);
 		$dompdf->render();
-		$dompdf->stream("sample.pdf");
+		//$dompdf->stream("sample.pdf");
+		$pdf = $dompdf->output();
+
+		$filename = 'sample2';
 		//echo SELF;
-		$this->load->view('welcome_message');
+		//$this->load->view('welcome_message');
+		 file_put_contents("./invoicepdf/".$filename.".pdf", $pdf);
+		 $filepath = "./invoicepdf/".$filename.".pdf";
+		 /*$filename = 'sample_impresion';
+
+		 	header('Content-Description: File Transfer');
+            header('Content-Type: application/octet-stream');
+            header('Content-disposition: attachment; filename='.$filename.'.pdf');
+            header('Content-Transfer-Encoding: binary');
+            header('Connection: Keep-Alive');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+            header('Pragma: public');
+            //header('Content-Length: ' . filesize($filepath));
+            readfile($filepath);*/
+
+            echo json_encode( array('URL' => $filepath ) );
 
     }
 

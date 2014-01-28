@@ -37,7 +37,7 @@ Class(UI,'feeFormReceipt').inherits(Widget)({
 				    <input type="text" class="form-control" name="fecha_factura"placeholder="Fecha">\
 				 </div>\
 				 <div class="form-group">\
-				 	<textarea class="form-control" rows="5" name="concepto" placeholder ="Concepto"></textarea>\
+				 	<textarea class="form-control" rows="5" name="concepto" id="concepto" placeholder ="Concepto"></textarea>\
 				 </div>\
 				 <div class="form-group col-xs-3 bottomSpace" style="margin-left:50%;" >\
 				    <input type="text" class="form-control" name="cantidad" placeholder="Cantidad"  >\
@@ -50,9 +50,10 @@ Class(UI,'feeFormReceipt').inherits(Widget)({
 				    <input type="text" class="form-control" name="total_pagado" placeholder="Total Pagado">\
 				 </div>\
 				 <label style="color:#333;font-size:11px;">Para realizar el calculo de su pago , debe poner la cantidad neta a pagar en el campo "Total pagado" y presiona enter.</label>\
-				<div class="form-group col-xs-3" style="clear:both;">\
+				<div class="form-group col-xs-5" style="clear:both;">\
 				  <button type="submit" class="btn btn-default" id="guardar" >Guardar</button>\
 				  <button class="btn btn-danger">Cancelar</button>\
+				  <button style="float:right;" type="submit" class="btn btn-primary" >Generar PDF</button>\
 				</div>\
 				</form>\
 			  </div>\
@@ -103,12 +104,19 @@ Class(UI,'feeFormReceipt').inherits(Widget)({
 			
 			$.ajax({
 				  type: "POST",
-				  url: "http://localhost/fee4free/index.php/invoice/insertInvoice",
+				  url: "http://localhost/fee4free/index.php/invoice/generatePDF",
 				  data: this._getValues(),
 				  dataType: "json",
 				})
 				  .done(function( msg ) {
-				      console.log(msg);
+				      //console.log(msg);
+
+				     // window.location.href = msg.URL;
+				      window.open(
+  						msg.URL,
+  						'_blank' // <- This is what makes it open in a new window.
+					);
+
 				  });
 			
 			event.preventDefault();

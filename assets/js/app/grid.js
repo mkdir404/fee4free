@@ -43,7 +43,7 @@ Class(UI,'grid').inherits(Widget)({
 		},
 
 		_bindEvents : function() {
-			tableElFiles.click(this.getValuesFiles.bind(this));			
+			tableElFiles.click(this.getValuesFiles.bind(this));
 		},
 
 		getValuesFiles : function(event){
@@ -63,6 +63,8 @@ Class(UI,'grid').inherits(Widget)({
 
 			this.loadDataForm( { id:event.currentTarget.id } );
 
+			$('#myModal').modal('hide')
+
 
 		},
 
@@ -78,17 +80,13 @@ Class(UI,'grid').inherits(Widget)({
 
 					  	if(data[0].success){
 
-					  		//console.log(data);
-
-					  		/*set all values*/
-
 					  		this.inputNombre.val( data[0].nombre )
 							this.inputCalle.val( data[0].calle ) 
 							this.inputColonia.val( data[0].colonia )
 							this.inputDelegacion.val( data[0].delegacion )
 							this.inputCodigoP.val( data[0].codigo_postal )
 							this.inputRfc.val( data[0].rfc )					
-							this.txtAconcepto( 'Honorarios' ) //base de datos 
+							this.txtAconcepto.val( 'Honorarios' ) //base de datos 
 					 	
 					 	}				 				 
 
