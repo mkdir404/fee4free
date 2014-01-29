@@ -1,48 +1,4 @@
-<html>
-<head>
-	<meta charset="UTF-8">
-	<title>Sample Boostrap</title>
-	 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <style>
-	.row{
-		padding: 10px;
-	}
 
-	.border-radio{
-		border: 1px solid #ccc;
-		padding: 8px;
-		margin-top:4px;
-		margin-bottom:4px;
-		-webkit-border-radius: 10px;
-		-moz-border-radius: 10px;
-		border-radius: 10px;
-	}
-
-	.container{
-		border: 1px solid #333;
-		margin-top:4px;
-		padding: 10px;
-		-webkit-border-radius: 5px;
-		-moz-border-radius: 5px;
-		border-radius: 5px;
-
-	}
-
-	.float-right{
-		float: right;
-	}
-	span{
-		padding: 5px;
-	}
-
-    </style>
-</head>
-<body>
-	
-
-	<div class='container'>
 
 	<div class="row ">
 
@@ -135,8 +91,3 @@
 	<div class="row col-xs-12">
 		Orginal
 	</div>
-
-</div>
-
-</body>
-</html>

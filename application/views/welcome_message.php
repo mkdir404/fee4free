@@ -12,13 +12,13 @@
 	<script src="http://underscorejs.org/underscore-min.js"></script>
 
 	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
 
 	<!-- Optional theme -->
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="assets/css/vendor/bootstrap-theme.min.css">
 
 	<!-- Latest compiled and minified JavaScript -->
-	<script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="assets/js/vendor/bootstrap.min.js"></script>
 
 	<!-- Font awesome -->
 	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">

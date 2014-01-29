@@ -13,6 +13,9 @@ class Invoice extends MY_Controller {
         parent::__construct();
         $this->load->model('invoicedao');
         $this->dao = $this->invoicedao;
+
+        $this->load->model('profiledao');
+        $this->daoProfile = $this->profiledao;
     }
 
     public function insertInvoice()
@@ -58,9 +61,10 @@ class Invoice extends MY_Controller {
     {
     	
     	$data = $this->getValues();
+        $this->daoProfile->getData();
 
 
-    	return $this->load->view('pdfhtml',$data,true);
+    	return $this->load->view('template/invoice/content',$data,true);
     }
 
     public function generatePDF()
@@ -71,11 +75,123 @@ class Invoice extends MY_Controller {
     	require_once(APPPATH."libraries/dompdf/dompdf_config.inc.php");
 
 
-    	$html =
+        /**/
+            
+               // $html = $this->load->view('template/header','',true);
+                //$footer = $this->load->view('template/footer','',true);
 
-  			'<html>'.
-  			'<head><title></title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-			</head><body>';
+    	$html ='<html>
+  			    <head><title></title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+                    <style>
+                            
+                            body{
+                                font-size:13px;
+                                font-family:helvetica;
+                            }
+
+                            p{
+                                padding-top:-8px;
+                            }
+
+                            .pay-info span {
+                                margin-top:-15;
+                                margin-left:120px;
+                            }
+
+                            .float-right{                            
+                                display: block;
+                            }
+
+                            .container{
+                                width:750px;
+                            }
+                            .row{
+                                padding: 5px;
+                                margin-bottom:5px;
+                            }
+
+                            .border-radio{                         
+                                padding: 6px;
+                                margin-bottom:6px;                              
+                            }
+                        
+                            span{
+                                padding-top: 5px;                    
+                            }
+
+                            .row {
+                              margin-right: -15px;
+                              margin-left: -15px;
+                            }
+
+                            .col-xs-12 {
+                              width: 100%;
+                            }
+
+                            .col-xs-11 {
+                              width: 91.66666666666666%;
+                            }
+
+                            .col-xs-10 {
+                              width: 83.33333333333334%;
+                            }
+
+                            .col-xs-9 {
+                              width: 75%;
+                            }
+
+                            .col-xs-8 {
+                              width: 66.66666666666666%;
+                            }
+
+                            .col-xs-7 {
+                              width: 58.333333333333336%;
+                            }
+
+                            .col-xs-6 {
+                              width: 50%;
+                            }
+
+                            .col-xs-5 {
+                              width: 41.66666666666667%;
+                            }
+
+                            .col-xs-4 {
+                              width: 33.33333333333333%;
+                            }
+
+                            .col-xs-3 {
+                              width: 25%;
+                            }
+
+                            .col-xs-2 {
+                              width: 16.666666666666664%;
+                            }
+
+                            .col-xs-1 {
+                              width: 8.333333333333332%;
+                            }
+                            
+                            .col-xs-1,
+                            .col-xs-2,
+                            .col-xs-3,
+                            .col-xs-4,
+                            .col-xs-5,
+                            .col-xs-6,
+                            .col-xs-7,
+                            .col-xs-8,
+                            .col-xs-9,
+                            .col-xs-10,
+                            .col-xs-11,
+                            .col-xs-12 {
+                              display: inline-block;
+                            }        
+
+
+
+                    </style>
+
+			    </head><body>';
 
   		$footer ='</body></html>';
 
@@ -91,8 +207,8 @@ class Invoice extends MY_Controller {
 		$filename = 'sample2';
 		//echo SELF;
 		//$this->load->view('welcome_message');
-		 file_put_contents("./invoicepdf/".$filename.".pdf", $pdf);
-		 $filepath = "./invoicepdf/".$filename.".pdf";
+		 file_put_contents("./uploads/invoicepdf/".$filename.".pdf", $pdf);
+		 $filepath = "./uploads/invoicepdf/".$filename.".pdf";
 		 /*$filename = 'sample_impresion';
 
 		 	header('Content-Description: File Transfer');
